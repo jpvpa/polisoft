@@ -1,0 +1,38 @@
+
+.firstbg{
+	background-color: #FFEADB;
+}
+.row{
+	margin-left: 0;
+	margin-right: 0;
+}
+.text1{
+	width: 100%;
+	font-family: 'Montserrat', sans-serif;
+}
+h2{
+	font-weight: 700;
+	font-size: 3.2em;
+}
+.img{
+	width: 100%;
+	height: 100%;
+}
+span{
+	color: #FF9999;
+	font-weight: 700;	
+}
+.btn{
+	padding :0;
+}
+/* 
+.sbtn {
+	font-size: .8rem;
+} */
+.sbtn:hover {
+	color: #fff;
+	text-decoration: none;
+}
+.sbtn.sb-c2 {
+	background: #EAB0D9;
+}
