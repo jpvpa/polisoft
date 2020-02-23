@@ -1,0 +1,44 @@
+<body>
+    <section>
+        <div class="container">
+            
+            <section>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img src="../../../../assets/images/side-bg.png" alt="sidebackground" class="sidebg">
+                    </div>
+                    <div class="login p-5 col-6">
+                        <div class="loginform mx-auto">
+                            <form>
+                                <div class="form-group mx-auto">
+                                  <label for="exampleInputEmail1">Email address</label>
+                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" #userName required>
+
+                                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                </div>
+                                <div class="form-group">
+                                  <label for="exampleInputPassword1">Password</label>
+                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" #userPassword required>
+                                </div>
+                                <div class="form-group form-check">
+                                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <div class="formGroup">
+                                    <input type="button" class="m-3 btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
+                                </div>
+                              </form>
+                            <div class="footerinfo">
+                                <span class="footerlink" routerLink="/forgot-password">Forgot your password?</span> 
+                            </div>
+                            <div class="redirectToLogin">
+                                <span>Don't have an account?<a class="redirect" routerLink="/register-user"> Sign Up</a></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+            </section>
+        </div>
+    </section>
+</body>

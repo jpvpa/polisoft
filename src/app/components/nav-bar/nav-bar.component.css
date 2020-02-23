@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
+
+.navbar-light {
+	background: #F7C5A8;
+}
+.mainmenu{
+    font-family: 'Montserrat', sans-serif;
+}
+.login{
+    padding-left: .5rem;
+    padding-right: .5rem;
+    border-radius: 1.5rem;
+    background-color: rgba(255, 234, 219, 0.521);
+    
+}
+.login:hover{
+    background-color: rgba(255, 234, 219, 0.753);
+    
+}
