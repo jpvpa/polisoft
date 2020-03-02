@@ -29,6 +29,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
 
+//FontAwesome - icons
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 var firebaseConfig = {
   apiKey: "AIzaSyBPYfWHdYBnmz_Ki3UA2jtS4kJbkdWIZ6k",
@@ -60,6 +62,7 @@ var firebaseConfig = {
   ],
   imports: [
     BrowserModule,
+    FontAwesomeModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, 'polisoft'),
     AngularFirestoreModule,
