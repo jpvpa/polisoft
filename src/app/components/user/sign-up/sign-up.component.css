@@ -1,0 +1,16 @@
+.form-control{
+  border-radius: 1rem;
+}
+.btnPrimary{
+  width: 100%;
+  border-radius: 1rem;
+  background-color: #ffd8cb;
+  color: white;
+  text-align: center;
+
+}
+.signUp{
+  width: 30rem;
+  border: 3px solid #f4f4f4;
+  background-size: 100% 100%;
+}

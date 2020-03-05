@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from "./../../shared/services/auth.service";
+import { AngularFireAuth } from "@angular/fire/auth";
+//New service
+import {  NavbarServiceService } from './../../shared/services/navbar-service.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -6,10 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  
+  constructor(public authService: AuthService, public nav: NavbarServiceService) { }
+  //public isLoggedIn: boolean = false;
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+    ngOnInit() {
+      this.nav.show(); //bug - show in every route?
+    }
 }

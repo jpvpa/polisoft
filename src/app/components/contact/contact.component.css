@@ -1,0 +1,259 @@
+.newsbg {
+  width: 100%;
+}
+
+.header-title {
+  text-align: center;
+  color: black;
+}
+
+#tip {
+  display: none;
+}
+
+.fadeIn {
+  animation-duration: 3s;
+}
+
+.form-control {
+  border-radius: 0px;
+  border: 1px solid #EDEDED;
+}
+
+.form-control:focus {
+  border: 1px solid #F7C5A8;
+}
+
+.textarea-contact {
+  resize: none;
+}
+
+.btn-send {
+  border-radius: 0px;
+  border: 1px solid#F7C5A8;
+  background: #F7C5A8;
+  color: #fff;
+}
+
+.btn-send:hover {
+  border: 1px solid #F7C5A8;
+  background: #fff;
+  color: #F7C5A8;
+  transition: background 0.5s;
+}
+
+.second-portion {
+  margin-top: 50px;
+}
+
+@import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css";
+@import "http://fonts.googleapis.com/css?family=Roboto:400,500";
+
+.box>.icon {
+  text-align: center;
+  position: relative;
+}
+
+.box>.icon>.image {
+  position: relative;
+  z-index: 2;
+  margin: auto;
+  width: 88px;
+  height: 88px;
+  border: 8px solid white;
+  line-height: 88px;
+  border-radius: 50%;
+  background: #F7C5A8;
+  vertical-align: middle;
+}
+
+.box>.icon:hover>.image {
+  background: #333;
+}
+
+.box>.icon>.image>i {
+  font-size: 36px !important;
+  color: #fff !important;
+}
+
+.box>.icon:hover>.image>i {
+  color: white !important;
+}
+
+.box>.icon>.info {
+  margin-top: -24px;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid #e0e0e0;
+  padding: 15px 0 10px 0;
+  min-height: 163px;
+}
+
+.box>.icon:hover>.info {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: #e0e0e0;
+  color: white;
+}
+
+.box>.icon>.info>h3.title {
+  font-family: "Robot", sans-serif !important;
+  font-size: 16px;
+  color: #222;
+  font-weight: 700;
+}
+
+.box>.icon>.info>p {
+  font-family: "Robot", sans-serif !important;
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5em;
+  margin: 20px;
+}
+
+.box>.icon:hover>.info>h3.title,
+.box>.icon:hover>.info>p,
+.box>.icon:hover>.info>.more>a {
+  color: #222;
+}
+
+.box>.icon>.info>.more a {
+  font-family: "Robot", sans-serif !important;
+  font-size: 12px;
+  color: #222;
+  line-height: 12px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.box>.icon:hover>.info>.more>a {
+  color: #fff;
+  padding: 6px 8px;
+  background-color: #63B76C;
+}
+
+.box .space {
+  height: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+  .contact-form {
+    margin-top: 25px;
+  }
+
+  .btn-send {
+    width: 100%;
+    padding: 10px;
+  }
+
+  .second-portion {
+    margin-top: 25px;
+  }
+}
+
+/* Conatct end */
+
+/* hola */
+ul.social-network {
+  list-style: none;
+  display: inline;
+  margin-left: 0 !important;
+  padding: 0;
+  font-size: 50px;
+  margin-right: 10px;
+  text-align: center;
+}
+
+
+ul.social-network li {
+  display: inline-block;
+  margin: 0 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-top: 40%;
+}
+
+
+/* footer social icons */
+.social-network a.icoRss:hover {
+  background-color: #F56505;
+}
+
+.social-network a.icoFacebook:hover {
+  background-color: #3B5998;
+}
+
+.social-network a.icoTwitter:hover {
+  background-color: #33ccff;
+}
+
+.social-network a.icoGoogle:hover {
+  background-color: #BD3518;
+}
+
+.social-network a.icoVimeo:hover {
+  background-color: #0590B8;
+}
+
+.social-network a.icoLinkedin:hover {
+  background-color: #007bb7;
+}
+
+.social-network a.icoRss:hover i,
+.social-network a.icoFacebook:hover i,
+.social-network a.icoTwitter:hover i,
+.social-network a.icoGoogle:hover i,
+.social-network a.icoVimeo:hover i,
+.social-network a.icoLinkedin:hover i {
+  color: #fff;
+}
+
+a.socialIcon:hover,
+.socialHoverClass {
+  color: #44BCDD;
+}
+
+.social-circle li a {
+  display: inline-block;
+  position: relative;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  text-align: center;
+  width: 90px;
+  height: 90px;
+  font-size: 50px;
+}
+
+.wrp{
+  text-align: center;
+}
+.social-circle li i {
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -ms--transform: rotate(360deg);
+  transform: rotate(360deg);
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.social-circle i {
+  color: #fff;
+  -webkit-transition: all 0.8s;
+  -moz-transition: all 0.8s;
+  -o-transition: all 0.8s;
+  -ms-transition: all 0.8s;
+  transition: all 0.8s;
+}
+
+a {
+  background-color: #F7C5A8;
+}

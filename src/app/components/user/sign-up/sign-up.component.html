@@ -1,0 +1,32 @@
+<body>
+  <div class="container mt-5">
+    <div class="signUp mx-auto mt-10" style="width: 28rem;">
+      <div class="card-body">
+        <h4 class="card-title" style="text-align: center;">SIGN UP</h4>
+        <h6 class="card-title mt-3">Abre una cuenta. Es rápido y facil.</h6>
+        <div class="formGroup mt-3">
+          <label for="exampleInputEmail1">Email address</label>
+          <input type="email" class=" form-control" style="width: 100%;" placeholder="Email Address" #userEmail
+            required>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="formGroup mt-3">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control " style="width: 100%;" placeholder="Password" #userPwd required>
+        </div>
+        <div class="formGroup">
+          <input type="button" class="btn btnPrimary mt-5" value="Sign Up"
+            (click)="authService.SignUp(userEmail.value, userPwd.value)">
+        </div>
+
+        <div class="formGroup mt-3" style="text-align: center;">
+          <span class="or"><span class="orInner" >Or</span></span>
+        </div>
+
+        <div class="redirectToLogin mt-3" style="text-align: center;">
+          <span>Already have an account? <a class="redirect" routerLink="/sign-in">Log in</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
