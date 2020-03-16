@@ -21,7 +21,7 @@
 }
 
 .form-control:focus {
-  border: 1px solid #F7C5A8;
+  border: 1px solid #ffd8cb;
 }
 
 .textarea-contact {
@@ -30,15 +30,15 @@
 
 .btn-send {
   border-radius: 0px;
-  border: 1px solid#F7C5A8;
-  background: #F7C5A8;
+  border: 1px solid#ffd8cb;
+  background: #ffd8cb;
   color: #fff;
 }
 
 .btn-send:hover {
-  border: 1px solid #F7C5A8;
+  border: 1px solid #ffd8cb;
   background: #fff;
-  color: #F7C5A8;
+  color: #ffd8cb;
   transition: background 0.5s;
 }
 
@@ -63,12 +63,12 @@
   border: 8px solid white;
   line-height: 88px;
   border-radius: 50%;
-  background: #F7C5A8;
+  background: #F29F80;
   vertical-align: middle;
 }
 
 .box>.icon:hover>.image {
-  background: #333;
+  background: #402E1E;
 }
 
 .box>.icon>.image>i {
@@ -82,14 +82,14 @@
 
 .box>.icon>.info {
   margin-top: -24px;
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid #e0e0e0;
+  background: white;
+  border: 3px solid #f4f4f4;
   padding: 15px 0 10px 0;
   min-height: 163px;
 }
 
 .box>.icon:hover>.info {
-  background: rgba(0, 0, 0, 0.04);
+  background: white;
   border-color: #e0e0e0;
   color: white;
 }
@@ -193,8 +193,8 @@ ul.social-network li {
   background-color: #0590B8;
 }
 
-.social-network a.icoLinkedin:hover {
-  background-color: #007bb7;
+.social-network a.icoInstagram:hover {
+  background-color: #E1306C;
 }
 
 .social-network a.icoRss:hover i,
@@ -255,5 +255,10 @@ a.socialIcon:hover,
 }
 
 a {
-  background-color: #F7C5A8;
+  background-color: #F29F80;
+}
+.info{
+  width: 100%;
+  border: 3px solid #f4f4f4;
+  padding: 3rem;
 }

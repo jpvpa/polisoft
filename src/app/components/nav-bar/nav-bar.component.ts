@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AuthService } from "./../../shared/services/auth.service";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { Component, OnInit, Input, NgZone } from '@angular/core';
+import { AuthService } from '../../shared/services/auth.service';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from "@angular/router";
 //New service
 import {  NavbarServiceService } from './../../shared/services/navbar-service.service';
+
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,10 +13,29 @@ import {  NavbarServiceService } from './../../shared/services/navbar-service.se
 })
 export class NavBarComponent implements OnInit {
   
-  constructor(public authService: AuthService, public nav: NavbarServiceService) { }
-  //public isLoggedIn: boolean = false;
+  constructor(public authService: AuthService, public afAuth: AngularFireAuth,
+    public router: Router,
+    public ngZone: NgZone) { }
+  public isLogged: boolean = false;
 
     ngOnInit() {
-      this.nav.show(); //bug - show in every route?
+      this.getCurrentUser();
+      /* this.nav.show(); bug - show in every route? */
+    }
+
+    getCurrentUser() {
+      this.authService.isAuth().subscribe(auth => {
+        if (auth) {
+          console.log('user logged');
+          this.isLogged = true;
+        } else {
+          console.log('NOT user logged');
+          this.isLogged = false;
+        }
+      });
+    }
+  
+    SignOut() {
+      this.afAuth.auth.signOut();
     }
 }

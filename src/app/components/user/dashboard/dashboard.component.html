@@ -1,5 +1,5 @@
 <!-- copy & paste (old style) -->
-<nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+<!-- <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
   <a class="navbar-brand" href="#"><img src="#" class="logo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -24,36 +24,53 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/contact" routerLinkActive="active">CONTACT</a>
         </li>
-        <li class="nav-item mx-auto">
-          <div class="login mx-auto">
-            <a class="nav-link mx-auto" (click)="authService.SignOut()">LOG OUT</a>
-          </div>
-        </li>
       </ul>
   </span>
   </div>
-</nav>
+</nav> -->
 
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-    <div class="inner-adjust">
-      <div class="pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">User Profile</h1>
-      </div>
-      <!-- Show user data when logged in -->
-      <div class="row" *ngIf="authService.userData as user">
-        <div class="col-md-12">
-          <div class="media">
-            <img class="align-self-start mr-5 img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/images/staff_2.jpg'}}"
-              alt="{{user.displayName}}">
-            <div class="media-body">
-              <h1>Hello: <strong>{{(user.displayName) ? user.displayName: 'User'}}</strong></h1>
-              <p>User ID: <strong>{{user.uid}}</strong></p>
-              <p>Email: <strong>{{user.email}}</strong></p>
-              <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
-              <!--<h1>test: <strong>{{(user.displayName) ? user.displayName: 'no work'}}</strong></h1>-->
-            </div>
+  <section class="container">
+    <div class="row">
+      <div class="col-lg-3 col-sm-12 col-md-3 bg-light p-0">
+        <nav class="d-md-block bg-light sidebar w-100">
+          <div class="sidebar-sticky">
+            <ul class="pt-md-5 pb-md-5 nav flex-column">
+      
+              <li class="al nav-item">
+                <a class="nav-link active al"><img class="py-2" src="../../../../assets/images/account.png">
+                  User Profile
+                </a>
+              </li>
+              
+              <li class="al nav-item">
+                <a class="nav-link al" (click)="authService.SignOut()"><img class="py-2" src="../../../../assets/images/logout.png" alt="" srcset="">
+                  Sign out
+                </a>
+              </li>
+      
+            </ul>
           </div>
+        </nav>
+      </div>
+    
+      <div class="col-sm-12 col-md-9 mt-3 mb-4">
+  
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">User Profile</h1>
+        </div>
+  
+        <div class="row p-1" *ngIf="authService.userData as user">
+            <div class="col-sm-12 col-md-6 col-lg-5 align-self-center">
+              <img class="align-self-md-start align-self-center mr-3 img-thumbnail rounded-circle img" src="{{(user.photoURL) ? user.photoURL : '/assets/images/staff_2.jpg'}}"
+                alt="{{user.displayName}}">
+              </div>
+              <div class="p-2 col-sm-12 col-md-6 col-lg-7 media-body">
+                <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
+                <p>User ID: <strong>{{user.uid}}</strong></p>
+                <p>Email: <strong>{{user.email}}</strong></p>
+                <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+              </div>
         </div>
       </div>
     </div>
-  </main>
+  </section>

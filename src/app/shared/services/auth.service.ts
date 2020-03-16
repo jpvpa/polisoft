@@ -126,6 +126,9 @@ export class AuthService {
     })
   }
 
+  isAuth(){
+    return this.afAuth.authState.pipe(map(auth => auth))
+  }
 
 
 
