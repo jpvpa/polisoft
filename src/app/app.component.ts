@@ -8,7 +8,8 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 })
 export class AppComponent {
   title = 'Polisoft';
-  faCoffee = faCoffee;
-}
+  //Remove icon --> faCoffee = faCoffee; --> Reference: https://golb.hplar.ch/2019/02/fa.html
 
-// Reference: https://golb.hplar.ch/2019/02/fa.html
+  constructor() { }
+  ngOnInit() { }
+}
