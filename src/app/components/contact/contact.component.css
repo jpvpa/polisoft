@@ -1,3 +1,7 @@
+/* No mover de aqui */
+@import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css";
+@import "http://fonts.googleapis.com/css?family=Roboto:400,500";
+
 .newsbg {
   width: 100%;
 }
@@ -45,9 +49,6 @@
 .second-portion {
   margin-top: 50px;
 }
-
-@import "//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css";
-@import "http://fonts.googleapis.com/css?family=Roboto:400,500";
 
 .box>.icon {
   text-align: center;
