@@ -1,122 +1,138 @@
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-</head>
-<section class="mabout" >
+  </head>
+  <section class="mabout">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <article class="m-4 formd">
-                    <h2 class="m-3 p-0">Book an Appointment</h2>
-                            <form class="m-2 mx-4">
-                                    <label for="Name">Name</label>
-                                    <input type="text" class="form-control" id="Name" placeholder="Name"><br>
-                                 
-                                    <label for="Empleado">Staff</label>
-                                    <select class="form-control">
-                                        <option selected>Choose one...</option>
-                                        <option>Sofia Villarreal</option>
-                                        <option>María Espinoza</option>
-                                        <option>Paola Rodriguez</option>
-                                    </select><br>
-            
-                                    <label for="Servicio">Service</label>
-                                    <select class="form-control">
-                                        <option selected>Choose one...</option>
-                                        <option>Maniqure</option>
-                                        <option>Pediqure</option>
-                                        <option>Maniquire y pediqure</option>
-                                    </select><br>
-                                    <small class="form-text text-muted">
-                                        In case of not assisting to the appoinment, please contact us for cancelletion.
-                                    </small>
-                            </form>
-                </article>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="row m-0 h-100 align-items-center">
-                    <div class="col-sm-12 col-lg-6">
-                        <a href="#" class="site-btn"  role="button">Make your design</a>
-                    </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <article class="m-4 formd">
+            <h2 class="m-3 p-0">Book an Appointment</h2>
+            <form (ngSubmit)="onSubmit()" class="m-2 mx-4">
+              <label for="Name">Name</label>
+              <input type="text" class="form-control" id="Name" placeholder="Name"><br>
+  
+              <label for="Empleado">Staff</label>
+              <select class="form-control">
+                <option selected>Choose one...</option>
+                <option>Sofia Villarreal</option>
+                <option>María Espinoza</option>
+                <option>Paola Rodriguez</option>
+              </select><br>
+  
+              <label for="Servicio">Service</label>
+              <select class="form-control">
+                <option selected>Choose one...</option>
+                <option>Maniqure</option>
+                <option>Pediqure</option>
+                <option>Maniquire y pediqure</option>
+              </select><br>
+  
+              <label for="fecha">Date</label>
+              <dl-date-time-picker 
+              startView="day" 
+              maxView="year" 
+              minView="minute" 
+              minuteStep="5"
+              [(ngModel)]="selectedDate" id="cite"
+              [ngModelOptions]="{standalone: true}"
+              
+              >
+              </dl-date-time-picker>
+              <span>Your cite is: {{ selectedDate }}</span> 
 
-                    <div class="col-sm-12 col-lg-6">
-                        <a class="site-btn sb-c2" routerLink="/news" role="button">Designs</a>
-                    </div>
-                </div>          
-            </div>
+              <small class="form-text text-muted">
+                <br> <!--Brinco que te salto -->
+                In case of not assisting to the appoinment, please contact us for cancelletion.
+              </small>
+                <br> <!--Brinco que te salto -->
+
+              <button type="submit" class="btn btn-success">Submit</button>
+            </form>
+          </article>
         </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="row m-0 h-100 align-items-center">
+            <div class="col-sm-12 col-lg-6">
+              <a href="#" class="site-btn" role="button">Make your design</a>
+            </div>
+  
+            <div class="col-sm-12 col-lg-6">
+              <a class="site-btn sb-c2" routerLink="/news" role="button">Designs</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
-
-<section ng-app="myApp" ng-controller="myCtrl">
+  </section>
+  
+  <section ng-app="myApp" ng-controller="myCtrl">
     <div class="container">
-        <div class="row">
-            <div class="col-sm-12 col-md-6 col-lg-6 p-3">
-                <article class="m-4">
-                    <article>
-                        <div class="col-12 whitebg mx-auto">
-                            <div class="row"><h1>Nail design</h1></div>
-                            <div class="row">
-                                <form class="mx-4">
-                                        <label for="Nail shape">Nail shape</label>
-                                        <select  id="tipo" class="form-control" onchange="actualizarImagen()">
-                                            <option value="S">Choose one..</option>
-                                            <option value="A">Almond </option>
-                                            <option value="B">Square</option>
-                                            <option value="C">Oval</option>
-                                        </select>
-    
-                                        <label for="Nail Color">Nail color</label>
-                                        <select id="color" onchange="actualizarImagen()" class="form-control">
-                                            <option value="0" selected>Choose one..</option>
-                                            <option value="1">Celeste </option>
-                                            <option value="2">Verde</option>
-                                            <option value="3">Naranja</option>
-                                            <option value="4">Rosa</option>
-                                            <option value="5">Morado</option>
-                                            </select>
-                                        
-                                        <label  for="Nail Design">Nail Design</label>
-                                            <select id="diseño" class="form-control" onchange="actualizarImagen()" runat="server" >
-                                                <option value="SD" selected>Choose one..</option>
-                                                <option value="Deg">Degradado</option>
-                                                <option value="Ped">Pedreria</option>
-                                                <option value="ZZ">Zig-Zag</option>
-                                            </select>
-                                        <small class="form-text text-muted">
-                                            If you would like another design, you can choose it in the news section.
-                                        </small>
-                                </form>
-                            </div>
-                        </div>
-                    </article>
-                </article>
-            </div>
-            <div class="col-sm-12 col-md-6 col-lg-6">
-                <article>
-                    <label for="Servicio">Diseño predefinido </label><br>
-                    <div id="imagenes">
-                        <img  id="TipoDe" src="" style="width:45%;"/>
-                    </div>
-
-                    <!-- <script>
-                        var app = angular.module('myApp', []);
-                            app.controller('myCtrl', function($scope) {
-                                $scope.tipo = document.getElementById("tipo");
-                                $scope.color = document.getElementById("color");
-                                $scope.diseno = document.getElementById("diseño");
-                                $scope.actualizarImagen() = function() {
-                                    console.log(tipo.value + ' / ' + color.value + '/' + diseño.value);
-                                    if (document.images) document.images['myImage'].src = 'images/' + tipo.value + '/' + color.value + '/' + diseno.value + '.png';
-                                }
-                            });
-                    </script> -->
-                </article>
-            </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-6 p-3">
+          <article class="m-4">
+            <article>
+              <div class="col-12 whitebg mx-auto">
+                <div class="row">
+                  <h1>Nail design</h1>
+                </div>
+                <div class="row">
+                  <form class="mx-4">
+                    <label for="Nail shape">Nail shape</label>
+                    <select id="tipo" class="form-control" onchange="actualizarImagen()">
+                      <option value="S">Choose one..</option>
+                      <option value="A">Almond </option>
+                      <option value="B">Square</option>
+                      <option value="C">Oval</option>
+                    </select>
+  
+                    <label for="Nail Color">Nail color</label>
+                    <select id="color" onchange="actualizarImagen()" class="form-control">
+                      <option value="0" selected>Choose one..</option>
+                      <option value="1">Celeste </option>
+                      <option value="2">Verde</option>
+                      <option value="3">Naranja</option>
+                      <option value="4">Rosa</option>
+                      <option value="5">Morado</option>
+                    </select>
+  
+                    <label for="Nail Design">Nail Design</label>
+                    <select id="diseño" class="form-control" onchange="actualizarImagen()" runat="server">
+                      <option value="SD" selected>Choose one..</option>
+                      <option value="Deg">Degradado</option>
+                      <option value="Ped">Pedreria</option>
+                      <option value="ZZ">Zig-Zag</option>
+                    </select>
+                    <small class="form-text text-muted">
+                      If you would like another design, you can choose it in the news section.
+                    </small>
+                  </form>
+                </div>
+              </div>
+            </article>
+          </article>
         </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <article>
+            <label for="Servicio">Diseño predefinido </label><br>
+            <div id="imagenes">
+              <img id="TipoDe" src="" style="width:45%;" />
+            </div>
+  
+            <!-- <script>
+                          var app = angular.module('myApp', []);
+                              app.controller('myCtrl', function($scope) {
+                                  $scope.tipo = document.getElementById("tipo");
+                                  $scope.color = document.getElementById("color");
+                                  $scope.diseno = document.getElementById("diseño");
+                                  $scope.actualizarImagen() = function() {
+                                      console.log(tipo.value + ' / ' + color.value + '/' + diseño.value);
+                                      if (document.images) document.images['myImage'].src = 'images/' + tipo.value + '/' + color.value + '/' + diseno.value + '.png';
+                                  }
+                              });
+                      </script> -->
+          </article>
+        </div>
+      </div>
     </div>
-</section>
-
-
-
-
-
+  </section>

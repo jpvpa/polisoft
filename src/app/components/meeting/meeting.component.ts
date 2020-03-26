@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-meeting',
@@ -6,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./meeting.component.css']
 })
 export class MeetingComponent implements OnInit {
-  constructor() { }
+
+  valueDate = '';
+  cite: Observable<any[]>; //Array to push
+
+  constructor(public db: AngularFireDatabase) {
+    this.cite = db.list('cite').valueChanges();
+  }
+ 
+  onSubmit() {
+    this.db.list('cite').push({ content: this.valueDate});
+    this.valueDate = '';
+  }
+
   ngOnInit() {
   }
 }

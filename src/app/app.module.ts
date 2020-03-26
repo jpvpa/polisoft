@@ -28,9 +28,13 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { FooterComponent } from './components/footer/footer.component';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 //FontAwesome - icons
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+//Calendar
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { FormsModule } from '@angular/forms';
 
 var firebaseConfig = {
   apiKey: "AIzaSyBPYfWHdYBnmz_Ki3UA2jtS4kJbkdWIZ6k",
@@ -68,7 +72,11 @@ var firebaseConfig = {
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    HttpClientModule
+    AngularFireDatabaseModule, // <---  Database
+    HttpClientModule,
+    DlDateTimeDateModule,  // <--- Calendar
+    DlDateTimePickerModule,
+    FormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
