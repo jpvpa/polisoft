@@ -5,19 +5,78 @@
         <div class="card-body">
           <h4 class="card-title" style="text-align: center;">SIGN UP</h4>
           <h6 class="card-title mt-3">Abre una cuenta. Es rápido y facil.</h6>
-          <div class="formGroup mt-3">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class=" form-control" style="width: 100%;" placeholder="Email Address" #userEmail
-              required>
-              <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          <form [formGroup]="emailform">
+            <!-- ----------------Username--------------------- -->
+            <div class="form-group mt-3">
+              <label for="exampleInputUsername1">Username</label>
+              <input type="text" 
+                    formControlName="username" 
+                    class="form-control form-control-md" 
+                    type="text" placeholder="Username" 
+                    (blur)="search($event)">
+              <small class="mt-0 mb-1 text-danger" *ngIf="username.touched && username.errors">
+                <div *ngIf="username.errors.required">A Username is required.</div>
+                <div *ngIf="username.errors.minlength">Username should be minimum {{username.errors.minlength.requiredLength}} characters.</div>
+                <div *ngIf="username.errors.cannotContainSpace">Username cannot contain space.</div>
+              </small>
+              <small class="mt-0 mb-1 text-danger" *ngIf="username.touched && isTaken">
+                <div>Username already taken.</div>
+              </small>
+            </div>
+            <!-- ---------------Displayname----------------- -->
+            <div class="form-group mt-3">
+              <label for="exampleInputDsiplayname1">Name</label>
+              <input formControlName="displayname" 
+                  class="form-control form-control-md" 
+                  type="text" 
+                  placeholder="Name">
+              <small class="mt-0 mb-1 text-danger" *ngIf="displayname.touched && displayname.errors">
+                <div *ngIf="displayname.errors.required">A Name is required.</div>
+                <div *ngIf="displayname.errors.minlength">Name should be minimum {{displayname.errors.minlength.requiredLength}} characters.</div>
+              </small>
+            </div>
+            <!-- -------------------Email------------------ -->
+            <div class="form-group mt-3">
+              <label for="exampleInputEmail1">Email address</label>
+              <input formControlName="email" 
+                    class="form-control form-control-md" 
+                    type="text" 
+                    placeholder="Email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <small class="mt-0 mb-1 text-danger" *ngIf="email.touched && email.errors">
+                  <div *ngIf="email.errors.email && !email.errors.required">Please enter a valid Email.</div>
+                  <div *ngIf="email.errors.required">An Email is required.</div>
+                </small>
+            </div>
+            <!-- ------------------Password-------------------- -->
+            <div class="form-group mt-3">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" 
+                    formControlName="password" 
+                    class="form-control form-control-md" 
+                    type="password" 
+                    placeholder="Password">
+              <small class="mt-0 mb-1 text-danger" *ngIf="password?.touched && password.errors">
+                <div *ngIf="password.errors.minlength && !password.errors.required">Password should be minimum 6 characters.</div>
+                <div *ngIf="password.errors.required">A Password is required is required.</div>
+              </small>
+            </div>
+          <!-- ----------------Confirm Password----------------- -->
+          <div class="form-group mt-3">
+            <label for="exampleInputConfrimPassword">Confirm Password</label>
+            <input type="password" 
+                  formControlName="passwordConfirm" 
+                  class="form-control form-control-md" 
+                  type="password" 
+                  placeholder="Confirm Password">
+              <small class="mt-0 mb-1 text-danger" *ngIf="emailform.errors">
+                <div *ngIf="emailform.errors">Passwords do not match!</div>
+              </small>
           </div>
-          <div class="formGroup mt-3">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control " style="width: 100%;" placeholder="Password" #userPwd required>
-          </div>
-          <div class="formGroup">
-            <input type="button" class="btn btnPrimary mt-5" value="Sign Up"
-              (click)="authService.SignUp(userEmail.value, userPwd.value)">
+          </form>
+          
+          <div class="form-group">
+              <button id="email-register-btn" class="btn btnPrimary mt-5" (click)="register('email')">Signup</button>
           </div>
   
           <div class="formGroup mt-3" style="text-align: center;">
@@ -25,7 +84,7 @@
           </div>
   
           <div class="redirectToLogin mt-3" style="text-align: center;">
-            <span>Already have an account? <a class="redirect" routerLink="/sign-in">Log in</a></span>
+            Already have an account? <a class="redirect" routerLink="/sign-in">Log in</a>
           </div>
         </div>
       </div>

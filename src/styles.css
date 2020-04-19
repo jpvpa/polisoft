@@ -1,8 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-
+/* No mover de aqui */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~open-iconic/font/css/open-iconic-bootstrap.css';
 /*---- SITE BUTTONS----*/
 a:hover{
     text-decoration: none;
 }
-
-

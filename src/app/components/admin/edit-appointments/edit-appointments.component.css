@@ -1,0 +1,11 @@
+.btnPrimary{
+	width: 100%;
+    border-radius: 1rem;
+    background-color: #ffd8cb;
+    color: white;
+    text-align: center;
+
+}
+.form-control{
+	border-radius: 1rem;
+}

@@ -1,0 +1,90 @@
+<body class="bg-light">
+  <section class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-3">
+        <app-sidebar-dashadmin></app-sidebar-dashadmin>
+      </div>
+  
+      <div class="card border-white shadow-sm rounded p-3 my-5 rounded-lg col-sm-12 col-md-7 mt-3 mb-4">
+          <div class="pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Edit Appointment</h1>
+          </div>
+          <button type="button" (click)="goBack()">Go Back</button>
+          <form [formGroup]="editForm"   (ngSubmit)="update()" class="needs-validation">
+            <div class="row p-0  p-md-2">
+              <section class="col-md-6 col-12 p-1 p-md-4">
+                  <label for="uName">Name</label>
+                  <input type="text" 
+                        class="form-control" 
+                        id="uName" 
+                        formControlName="uName"
+                        placeholder="{{uName}}"
+                        required>
+                
+          
+                <label for="Empleado">Staff</label>
+                <select formControlName="selectStaff" class="form-control" required>
+                  <option value="0" selected>Choose one...</option>
+                  <option value="Sofia Villarreal">Sofia Villarreal</option>
+                  <option value="Maria Espinoza">María Espinoza</option>
+                  <option value="Paola Rodriguez">Paola Rodriguez</option>
+                </select>
+          
+                <label for="Servicio">Service</label>
+                <select formControlName="selectService" class="form-control" required>
+                  <option value="0" selected>Choose one...</option>
+                  <option value= "Maniqure">Maniqure</option>
+                  <option value="Pediqure">Pediqure</option>
+                  <option value ="PM">Maniquire y pediqure</option>
+                </select>
+                <label for="Time">Time Picker</label>
+                <select formControlName="selectTime" class="form-control" required>
+                  <option value="0" selected>Choose one...</option>
+                  <option value= "9:00 AM">9:00 AM</option>
+                  <option value="9:30 AM">9:30 AM</option>
+                  <option value ="10:00 AM">10:00 AM</option>
+                  <option value ="10:30 AM">10:30 AM</option>
+                  <option value ="11:00 AM">11:00 AM</option>
+                  <option value ="11:30 AM">11:30 AM</option>
+                  <option value ="12:00 AM">12:00 AM</option>
+                  <option value ="12:30 AM">12:30 AM</option>
+                  <option value ="1:00 PM">1:00 PM</option>
+                  <option value ="1:30 PM">1:30 PM</option>
+                  <option value ="3:00 PM">3:00 PM</option>
+                  <option value ="3:30 PM">3:30 PM</option>
+                  <option value ="4:00 PM">4:00 PM</option>
+                  <option value ="4:30 PM">4:30 PM</option>
+                  <option value ="5:00 PM">5:00 PM</option>
+                  <option value ="5:30 PM">5:30 PM</option>
+                </select>
+          
+              </section>
+              <section class="col-md-6 col-12 p-1 p-md-4">
+                <label for="fecha">Date Picker</label>
+                <dl-date-time-picker 
+                  startView="day" 
+                  maxView="day" 
+                  minView="day" 
+                  minuteStep="30"
+                  formControlName="selectDate"
+                  id="selectedDate"
+                  [selectFilter]="datePickerFilter"
+                  (onEventSelected)="onEventSelected($event)"
+                  [(ngModel)]="selectedDate">
+            
+                </dl-date-time-picker>
+              </section>
+            </div>
+            <button type="submit" class="btnPrimary btn p-2" [disabled]="clicked" (click)="clicked = true">Submit</button>
+          </form>
+      </div>
+    </div>
+  </section>  
+</body> 
+
+
+
+
+
+<section class="container">
+</section>

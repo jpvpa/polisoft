@@ -1,0 +1,43 @@
+<body class="bg-light">
+    <section class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-3">
+          <app-sidebar-dashadmin></app-sidebar-dashadmin>
+        </div>
+    
+        <div class="card border-white shadow-sm rounded p-3 my-5 rounded-lg col-sm-12 col-md-7 mt-3 mb-4">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Appointment List</h1>
+            </div>
+            <section *ngFor="let appointment of appointments; let index = index ">
+              <div class="table-responsive">
+                <div class="row m-0 p-0 justify-content-between topbar">
+                  
+                    <div class="col-4 text-left my-auto">
+                      <img class="p-1" routerLink="/edit-appointments/{{appointment.$key}}" src="../../../../assets/images/edit1.png" alt="">
+                      <img (click)="delete(appointment.id)" src="../../../../assets/images/basura.png" alt="">
+                    </div>
+
+                </div>
+              <table class="table table-sm p-2 container mb-1 tab">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Image</th>
+                      <th scope="col">Title</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Description</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody >
+                    <tr>
+                      <td scope="row">{{appointment.uName}}</td>
+                      <td>{{appointment.selectStaff}}</td>
+                      <td>{{appointment.selectService}}</td>
+                      <td >{{appointment.selectDate.toDate() | date:'dd/MM/yyyy'}} <br> <b>{{appointment.selectTime}}</b></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+        </div>

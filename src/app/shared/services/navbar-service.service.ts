@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
-
+import { Appoint} from '../model/appoint'
+import { AngularFireList, AngularFireObject } from '@angular/fire/database';
+import { AngularFirestoreCollection, AngularFirestore } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'
 })
 export class NavbarServiceService {
-  visible: boolean;
 
-  constructor() { this.visible = true; }
+  appointmentsRef: AngularFireList<any>;
+  appointmentRef: AngularFireObject<any>;  
 
-  hide() { this.visible = false; }
-
-  show() { this.visible = true; }
-
-  toggle() { this.visible = !this.visible; }
-  
-} //Thank you Stackoverflow
+  private appointmentsCollection: AngularFirestoreCollection<Appoint>;
+  constructor(private afs: AngularFirestore,){
+    this.appointmentsCollection = afs.collection<Appoint>('appointments'); 
+  }
+  addAppointment(appointment: Appoint){
+    this.appointmentsCollection.add(appointment)
+    console.log(appointment);
+  }
+}

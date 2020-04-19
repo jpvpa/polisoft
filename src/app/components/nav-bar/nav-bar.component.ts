@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from "@angular/router";
 //New service
 import {  NavbarServiceService } from './../../shared/services/navbar-service.service';
-
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,30 +12,59 @@ import {  NavbarServiceService } from './../../shared/services/navbar-service.se
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  
-  constructor(public authService: AuthService, public afAuth: AngularFireAuth,
+  isUser: boolean;
+  isAdmin: any = null;
+  displayName;
+  uid;
+  userName;
+  photoURL = '../../../assets/images/default-profile.jpg';
+  email;
+  constructor(public auth: AuthService, public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone) { }
+    public ngZone: NgZone,
+    private userService: UserService) { }
   public isLogged: boolean = false;
 
     ngOnInit() {
-      this.getCurrentUser();
-      /* this.nav.show(); bug - show in every route? */
+      this.isAdmin = false;
+      this.isUser = false;
+      this.getUserData();
     }
-
-    getCurrentUser() {
-      this.authService.isAuth().subscribe(auth => {
-        if (auth) {
-          console.log('user logged');
-          this.isLogged = true;
+  getUserData() {
+    this.auth.getAuthState().subscribe(
+      user => {
+        if (user) {
+          this.isUser = true;
+          this.userService.retrieveUserDocument(user.uid).subscribe(
+            userDoc => {
+              if (userDoc) {
+                this.displayName = userDoc.displayName;
+                this.userName = userDoc.userName;
+                this.photoURL = userDoc.photoURL;
+                this.uid = userDoc.uid;
+                this.auth.isUserAdmin(this.uid).subscribe(userRole => {
+                  this.isAdmin = Object.assign({}, userRole.roles).hasOwnProperty('admin');
+                });
+              }
+            });
         } else {
-          console.log('NOT user logged');
-          this.isLogged = false;
+          this.isUser = false;
+          this.isAdmin = false;
         }
       });
+  }
+    sendTo(path) {
+      if (path === 'dashboard') {
+        this.router.navigateByUrl('dashboard/' + this.userName);
+      }
+      if (path === 'dashboardadmin') {
+        this.router.navigateByUrl('dashboard-admin/' + this.userName);
+      }
+    }
+    logout() {
+      this.isAdmin = false;
+      this.isUser = false;
+      this.auth.logout();
     }
   
-    SignOut() {
-      this.afAuth.auth.signOut();
-    }
 }

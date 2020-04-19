@@ -9,8 +9,15 @@
 .login{
     padding-left: .5rem;
     padding-right: .5rem;
-    border-radius: 1.5rem;
+    border-radius: 1rem;
     background-color: rgba(255, 234, 219, 0.521);
+}
+.uname{
+    font-size: .7rem;
+    
+}
+.dname{
+    font-size: .8rem;
 }
 .login:hover{
     background-color: rgba(255, 234, 219, 0.753);    

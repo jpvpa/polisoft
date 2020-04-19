@@ -6,9 +6,10 @@ import {
   BrowserDynamicTestingModule,
   platformBrowserDynamicTesting
 } from '@angular/platform-browser-dynamic/testing';
+import {MDCRipple} from '@material/ripple';
 
 declare const require: any;
-
+const fabRipple = new MDCRipple(document.querySelector('.mdc-fab'));
 // First, initialize the Angular testing environment.
 getTestBed().initTestEnvironment(
   BrowserDynamicTestingModule,

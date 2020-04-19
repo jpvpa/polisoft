@@ -11,32 +11,47 @@
       </ul>
     <span class="navbar-text">
         <ul class="navbar-nav" >
-          <li class="nav-item">
+          <li class="nav-item align-self-center">
             <a class="nav-link" routerLink="/home" routerLinkActive="active">HOME</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item align-self-center">
             <a class="nav-link" routerLink="/staff" routerLinkActive="active" >STAFF</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item align-self-center">
             <a class="nav-link" routerLink="/meeting" routerLinkActive="active" >MEETING</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item align-self-center">
             <a class="nav-link" routerLink="/news" routerLinkActive="active" >NEWS</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item align-self-center">
             <a class="nav-link" routerLink="/contact" routerLinkActive="active" >CONTACT</a>
           </li>
-          <li class="nav-item mx-auto" *ngIf="!isLogged">
+          <li class="nav-item mx-auto align-self-center" >
             <div class="login mx-auto">
-              <a class="nav-link mx-auto" routerLink="/sign-in" routerLinkActive="active" >SIGN IN</a>
+              <a class="nav-link mx-auto" routerLink="/sign-in" routerLinkActive="active" *ngIf="!isUser">SIGN IN</a>
             </div>
           </li>
-         <li class="nav-item mx-auto" *ngIf="isLogged">
-            <div class="login mx-auto">
-              <a class="nav-link mx-auto" routerLink="/dashboard" routerLinkActive="active" >PROFILE</a>
+          <ng-template #noAdmin>
+         <li class="nav-item mx-auto" *ngIf="isUser">
+            <div class="login mx-auto d-flex flex-row p-2" (click) = "sendTo('dashboard')">
+              <img height="30px" width="30px" class="rounded-circle circle" [src]="photoURL" id="dropdownBasic2" ngbDropdownToggle>
+              <div>
+                <h6 class="mb-0 dname">{{displayName}}</h6>
+                <p class="text-muted mb-1 uname">@{{userName}}</p>
+              </div>
             </div> 
           </li> 
-
+          </ng-template>
+          
+          <li class="nav-item mx-auto" *ngIf="isAdmin == true; else noAdmin">
+            <div class="login mx-auto d-flex flex-row p-2" (click) = "sendTo('dashboardadmin')">
+              <img height="30px" width="30px" class="rounded-circle circle" [src]="photoURL" id="dropdownBasic2" ngbDropdownToggle>
+              <div>
+                <h6 class="mb-0 dname">{{displayName}}</h6>
+                <p class="text-muted mb-1 uname">@{{userName}}</p>
+              </div>
+            </div> 
+          </li> 
         </ul>
     </span>
   </div>

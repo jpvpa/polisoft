@@ -1,139 +1,225 @@
 import { Injectable, NgZone } from '@angular/core';
-import { User } from "../services/user";
-import { auth } from 'firebase/app';
-import { map } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
+import { Observable, of } from 'rxjs';
+import * as firebase from 'firebase/app';
 
+interface Roles{
+  admin?: boolean;
+  user?:boolean;
+}
+
+interface User {
+  uid?: string;
+  email?: string;
+  userName?: string;
+  displayName?: string;
+  photoURL?: string;
+  status?: string;
+  joinDate?: any;
+  roles?: Roles;
+} 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userData: any; // Guarda la información de usuario cuando este inicia sesión
+  adminCollection: AngularFirestoreCollection<User>;
+  adminObs: Observable<any>;
 
-  constructor(
-    public afs: AngularFirestore,   // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
-    public router: Router,  
-    public ngZone: NgZone // NgZone service no entendí muy bien pero en el tuto decía 
-  ) {    
-    /* Guarda los datos de usuario en el localstorage 
-    cuando inicia sesión y configura todo a cero 
-    cuando cierra sesión */
-    this.afAuth.authState.subscribe(user => {
+
+  private updateData: User;
+  user: Observable<User>;
+  userCollection: AngularFirestoreCollection<User>;
+  userObs: Observable<any>;
+
+  private authState: Observable<firebase.User>;
+  private currentUser: firebase.User = null;
+  private profileusername: string;
+  private status: string;
+  constructor(public afAuth: AngularFireAuth,
+      public afs: AngularFirestore,
+      public router: Router) {
+    this.authState = this.afAuth.authState;
+    this.authState.subscribe(user => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
-        JSON.parse(localStorage.getItem('user'));
+        console.log(user);
+        this.currentUser = user;
       } else {
-        localStorage.setItem('user', null);
-        JSON.parse(localStorage.getItem('user'));
+        this.currentUser = null;
       }
-    })
-  }
-  
-  // Inicia sesión con email/password
-  SignIn(email, password) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        });
-        this.SetUserData(result.user);
-      }).catch((error) => {
-        window.alert(error.message)
-      })
+    });
+    this.user = this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user) {
+          return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          return of(null);
+        }
+      }));
   }
 
-  // Registrate con email/password
-  SignUp(email, password) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((result) => {
-        /* llama a la función SendVerificaitonMail() cuando un nuevo usuario se registra */
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
-      }).catch((error) => {
-        window.alert(error.message)
-      })
+  getAuth() {
+    return this.afAuth.auth;
   }
 
-  // Envia una verificación del nuevo usuario registrado
-  SendVerificationMail() {
-    return this.afAuth.auth.currentUser.sendEmailVerification()
-    .then(() => {
-      this.router.navigate(['verify-email-address']);
-    })
-  }
 
-  // Resetea la contraseña
-  ForgotPassword(passwordResetEmail) {
-    return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
-    .then(() => {
-      window.alert('Password reset email sent, check your inbox.');
-    }).catch((error) => {
-      window.alert(error)
-    })
+  getAuthState() {
+    return this.afAuth.authState;
   }
-  
-  //devuelve verdadero cuando el usuario inicia sesión y el correo es verificado
-  get isLoggedIn(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
-    return (user !== null && user.emailVerified !== false) ? true : false;
+  emailLogin(email, password) {
+    this.afAuth.auth.signInWithEmailAndPassword(email, password);
 
   }
-
-  // Inicia sesion con Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+  googleLogin() {
+    const provider = new firebase.auth.GoogleAuthProvider();
+    return this.oAuthLogin(provider);
   }
-
-  // Se corre el provide de el Auth
-  AuthLogin(provider) {
+  private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
-    .then((result) => {
-       this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        })
-      this.SetUserData(result.user);
-    }).catch((error) => {
-      window.alert(error)
-    })
+      .then((credential) => {
+        this.afs.doc('users/' + credential.user.uid).valueChanges().subscribe(
+          user => {
+          if (user) {
+            this.router.navigateByUrl('/home');
+          } else {
+            this.afAuth.auth.signOut()
+            .then(() => this.router.navigateByUrl('/sign-up'));
+          }
+        });
+      });
   }
 
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
-  provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
-  SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-    const userData: User = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified
+  SignUp(userdata) {
+    if (userdata.type === 'email') {
+      this.SignIn(userdata);
     }
-    return userRef.set(userData, {
-      merge: true
+  }
+
+  private SignIn(formdata) {
+    this.afAuth.auth.createUserWithEmailAndPassword(formdata.email, formdata.password)
+    .then(() => {
+      this.getAuthState().subscribe(user => {
+        if (user) {
+          const userData = {
+            uid: user.uid,
+            email: user.email,
+            displayName: formdata.displayname,
+            status: 'Hi, I just made an account on POLISOFT',
+            userName: formdata.username,
+            roles: {
+              user: true
+            }
+          };console.log(user);
+          this.updateUserData(userData);
+        }
+      });
+    });
+  }
+
+
+  private updateUserData(user) {
+    this.userCollection = this.afs.collection('users', ref => ref.where('uid', '==', user.uid));
+    this.userObs = this.userCollection.valueChanges();
+    this.userObs.forEach( userobj => {
+      console.log('Existing User logged in- ', userobj[0].userName);
     })
+    .then(
+      (success) => {
+        this.router.navigateByUrl('/home');
+      })
+    .catch (
+      (err) => {
+          console.log('New User login.\nSetting up user in database.');
+          const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+        
+          const data: User = {
+            uid: user.uid,
+            email: user.email,
+            displayName: user.displayName,
+            photoURL: user.photoURL ? user.photoURL : '../../../assets/images/default-profile.jpg',
+            status: 'Hi, I just made an account on POLISOFT',
+            userName: user.userName,
+            joinDate: firebase.firestore.FieldValue.serverTimestamp(),
+            roles: {
+              user: true
+            }
+          };
+          if (this.afAuth.auth.currentUser) {
+            this.getAuth().currentUser.sendEmailVerification().then(() => {
+              this.SignOut();
+            });
+          }
+          return userRef.set(data);
+        });
+  }
+  SignOut(){
+    this.afAuth.auth.signOut().then(
+      () => {
+      console.log('User logged out successfully.');
+      this.router.navigateByUrl('verify-email-address');
+    });
   }
 
-  // Cierra sesión
-  SignOut() {
-    return this.afAuth.auth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
-    })
+  sendEmailVerify(){
+    if (this.afAuth.auth.currentUser) {
+      this.getAuth().currentUser.sendEmailVerification().then(() => {
+        this.logout();
+      });
+    }
   }
 
-  isAuth(){
-    return this.afAuth.authState.pipe(map(auth => auth))
+  logout() {
+    this.afAuth.auth.signOut().then(
+      () => {
+      console.log('User logged out successfully.');
+      this.router.navigateByUrl('/sign-in');
+    });
   }
 
+  updateUser(displayname, username, status) {
+    const updateRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentUser.uid}`);
+    this.updateData = {
+      userName: username,
+      status: status,
+      displayName: displayname,
+      roles: {
+        user: true
+      }
+    };
+    return updateRef.update(this.updateData);
+  }
 
+  isUserAdmin(userUid) {
+    return this.afs.doc<User>(`users/${userUid}`).valueChanges();
+  }
 
-/*   isAuth(){
-    return this.afAuth.authState.pipe(map(auth => auth))
-  } */
+  updatePhotoURL(photourl) {
+    const updateRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${this.currentUser.uid}`);
+    this.updateData = {
+      photoURL : photourl
+    };
+    return updateRef.update(this.updateData);
+  }
+  checkNotLogin() {
+    this.afAuth.authState.subscribe(
+      user => {
+        if (user) {
+          this.router.navigateByUrl('/home');
+        }
+      });
+  }
+
+  checkLogin() {
+    this.afAuth.authState.subscribe(
+      user => {
+        if (!user) {
+          this.router.navigateByUrl('/sign-in');
+        }
+      });
+  }
+
+  
 
 }

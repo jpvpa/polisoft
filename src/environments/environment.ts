@@ -4,15 +4,15 @@
 
 export const environment = {
   production: false,
-  firebaseConfig: {
-    apiKey: "AIzaSyBPYfWHdYBnmz_Ki3UA2jtS4kJbkdWIZ6k",
-    authDomain: "polisoft-4894b.firebaseapp.com",
-    databaseURL: "https://polisoft-4894b.firebaseio.com",
-    projectId: "polisoft-4894b",
-    storageBucket: "polisoft-4894b.appspot.com",
-    messagingSenderId: "491307709406",
-    appId: "1:491307709406:web:505e71a84c92ed55bc234f",
-    measurementId: "G-LES7R09QGS"
+  firebaseConfig : {
+    apiKey: "AIzaSyCaZU1raA2TmXnWjq1kkLEcYB-w5wiI6nk",
+    authDomain: "polisoft-684a2.firebaseapp.com",
+    databaseURL: "https://polisoft-684a2.firebaseio.com",
+    projectId: "polisoft-684a2",
+    storageBucket: "polisoft-684a2.appspot.com",
+    messagingSenderId: "648371730199",
+    appId: "1:648371730199:web:01d1881210a9f31f30e952",
+    measurementId: "G-P4PX71K4LB"
   }
 };
 

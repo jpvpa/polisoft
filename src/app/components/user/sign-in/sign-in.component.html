@@ -1,7 +1,6 @@
 <body>
     <section>
         <div class="container">
-
             <section>
                 <div class="row">
                     <div class="col-sm-6">
@@ -9,26 +8,41 @@
                     </div>
                     <div class="login p-5 col-6">
                         <div class="loginform mx-auto">
-                            <form>
+                            <form [formGroup]="emailform">
                               <h1 style="text-align: center;">Sign In</h1>
-                                <div class="form-group mx-auto mt-5">
+                              <!-- ----------Email address------- -->
+                                <div class="form-group mx-auto mt-3">
+                                    <small class="mt-0 mb-1 text-danger" *ngIf="error">{{error}}</small><br>
                                   <label for="exampleInputEmail1">Email address</label>
-                                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Username" #userName required>
+                                  <input class="form-control" 
+                                        formControlName="email" 
+                                        type="text" 
+                                        placeholder="Email">
 
-                                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <small class="mt-0 mb-1 text-danger" *ngIf="email.touched && email.errors">
+                                    <div *ngIf="email.errors.email && !email.errors.required">Please enter a valid Email.</div>
+                                    <div *ngIf="email.errors.required">An Email is required.</div>
+                                </small>
                                 </div>
-                                <div class="form-group mt-5">
+                                <!-- ---------------Password---------------- -->
+                                <div class="form-group mt-3">
                                   <label for="exampleInputPassword1">Password</label>
-                                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" #userPassword required>
+                                  <input formControlName="password" 
+                                        class="form-control" 
+                                        type="password" 
+                                        placeholder="Password">
+                                    <small class="mt-0 mb-1 text-danger" *ngIf="password.touched && password.errors">
+                                        <div *ngIf="password.errors.minlength">Password should be minimum 6 characters.</div>
+                                        <div *ngIf="password.errors.required">A Password is required is required.</div>
+                                    </small>
                                 </div>
-                                <div class="form-group form-check">
-                                  <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                  <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                                </div>
-                                <div class="formGroup mt-3">
-                                    <input type="button" class="m-3 btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
-                                </div>
-                              </form>
+                            </form>
+
+
+                            <div class="formGroup mt-3">
+                                <button id="login-btn" class="m-3 btn btnPrimary" (click)="login('email')">Login</button>
+                            </div>
+
                             <div class="footerinfo mt-2" style="text-align: center;">
                                 <span class="footerlink" routerLink="/forgot-password">Forgot your password?</span>
                             </div>
@@ -38,7 +52,6 @@
                         </div>
                     </div>
                 </div>
-
             </section>
         </div>
     </section>

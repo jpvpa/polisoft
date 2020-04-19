@@ -1,0 +1,30 @@
+<body class="bg-light">
+    <section class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-3">
+          <app-sidebar-dashadmin></app-sidebar-dashadmin>
+        </div>
+    
+        <div class="card border-white shadow-sm rounded p-3 my-5 rounded-lg col-sm-12 col-md-7 mt-3 mb-4">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">User List</h1>
+            </div>
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let item of items | async ">
+                  <tr>
+                    <th scope="row">{{item.displayName}}</th>
+                    <td>@{{item.userName}}</td>
+                    <td>{{item.email}}</td>
+                  </tr>
+                </tbody>
+              </table> 
+          </div>
+    
+        </div>

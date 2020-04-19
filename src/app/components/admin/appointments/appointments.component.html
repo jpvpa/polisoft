@@ -1,0 +1,71 @@
+<body class="bg-light">
+    <section class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-3">
+          <app-sidebar-dashadmin></app-sidebar-dashadmin>
+        </div>
+    
+        <div class="card border-white shadow-sm rounded p-3 my-5 rounded-lg col-sm-12 col-md-7 mt-3 mb-4">
+            <div class="pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Appointment List</h1>
+            </div>
+            <section *ngFor="let appointment of appointments; let index = index ">
+              <div class="table-responsive">
+                <div class="row m-0 p-0 justify-content-between topbar">
+                  
+                    <div class="col-3 p-1">
+                      <a class="badge badge-pill badge-light mx-auto mb-2" (click)="showSubItem(index)">show {{visibleIndex === index ? 'less':'more' }}</a> 
+                    </div>
+                    <div class="col-4 text-right my-auto">
+                      <img class="p-1" routerLink="/edit-appointments/{{appointment.$key}}" src="../../../../assets/images/edit1.png" alt="">
+                      <img (click)="delete(appointment.id)" src="../../../../assets/images/basura.png" alt="">
+                    </div>
+
+                </div>
+              <table class="table table-sm p-2 container mb-1 tab">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Staff</th>
+                      <th scope="col">Service</th>
+                      <th scope="col">Date</th>
+                    </tr>
+                  </thead>
+                  
+                  <tbody >
+                    <tr>
+                      <td scope="row">{{appointment.uName}}</td>
+                      <td>{{appointment.selectStaff}}</td>
+                      <td>{{appointment.selectService}}</td>
+                      <td >{{appointment.selectDate.toDate() | date:'dd/MM/yyyy'}} <br> <b>{{appointment.selectTime}}</b></td>
+                    </tr>
+                        <ng-container  *ngIf="visibleIndex === index" class="subheader">
+                            <tr class="thead-light">
+                              <th scope="row">Shape</th>
+                              <th>Color</th>
+                              <th>Design</th>
+                              <th>Specification</th>
+                            </tr>
+                            <tr>
+                              <td scope="row">{{(appointment.nailShape) ? appointment.nailShape : 'No polisoft design'}}</td>
+                              <td>{{(appointment.nailColor) ? appointment.nailColor : 'No polisoft design'}}</td>
+                              <td>{{(appointment.nailDesign) ? appointment.nailDesign : 'No polisoft design'}} </td>
+                              <td>{{(appointment.specifyDesign) ? appointment.specifyDesign : 'No polisoft design'}} </td>
+                            </tr>
+                            <tr class="p-0 m-0">
+                              <div *ngIf="appointment.nailColor || appointment.nailDesign || appointment.nailShape else noPSdesign">
+                                <td class="p-1 text-center mx-auto" colspan="2"><img class="image" src="../../../../assets/images/img/{{appointment.nailShape}}/{{appointment.nailColor}}/{{appointment.nailDesign}}.png" style="width:35%;" (click)="open(i)"/> </td>
+                              </div>
+                              <ng-template #noPSdesign>
+                                <td class="p-1 text-center mx-auto" colspan><img class= "image" [src]="appointment.nailPhoto" style="width:35%;"></td>
+                              </ng-template>
+                            </tr>
+                        </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+        </div>
+
+
+      

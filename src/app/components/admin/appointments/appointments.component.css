@@ -1,0 +1,17 @@
+.topbar{
+  background-color: #ffd8cb;
+}
+  .btnPrimary{
+	width: 50%;
+    border-radius: 1rem;
+    background-color: #ffd8cb;
+    color: white;
+    text-align: center;
+
+}
+td{
+  width: 25%;
+}
+.tab1{
+  overflow: auto;
+}
