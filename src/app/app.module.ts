@@ -52,7 +52,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
 import { DisablecontrolDirective } from './components/meeting/disablecontrol.directive';
 
 firebase.initializeApp(environment.firebaseConfig);
@@ -100,7 +99,6 @@ firebase.initializeApp(environment.firebaseConfig);
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot( ),
     ModalModule
   ],
   providers: [AuthService,UserService, UploadService, AppointmentService,  NewsService],
