@@ -73,6 +73,7 @@
           </small>
     
           <label for="fecha">Date Picker</label>
+          
           <dl-date-time-picker 
             startView="day" 
             maxView="day" 
@@ -85,8 +86,8 @@
             <small class="mt-0 mb-1 text-danger" *ngIf="selectDate.touched && isTaken">
               <div>Date is already taken.</div>
             </small>
-  
           </dl-date-time-picker>
+
           <label for="Time">Time Picker</label>
           <select (change)="search($event)" formControlName="selectTime" class="form-control" required>
             <option value="0" selected>Choose one...</option>

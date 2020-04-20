@@ -9,7 +9,6 @@ import * as moment from 'moment';
 import { AngularFireStorage} from '@angular/fire/storage';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import {NavbarServiceService} from 'src/app/shared/services/navbar-service.service'
 import {NavbarServiceService} from 'src/app/shared/services/navbar-service.service';
 import { Appoint } from '../../shared/model/appoint';
 import { Router } from '@angular/router';
