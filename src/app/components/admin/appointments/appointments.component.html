@@ -54,7 +54,7 @@
                             </tr>
                             <tr class="p-0 m-0">
                               <div *ngIf="appointment.nailColor || appointment.nailDesign || appointment.nailShape else noPSdesign">
-                                <td class="p-1 text-center mx-auto" colspan="2"><img class="image" src="../../../../assets/images/img/{{appointment.nailShape}}/{{appointment.nailColor}}/{{appointment.nailDesign}}.png" style="width:35%;" (click)="open(i)"/> </td>
+                                <td class="p-1 text-center mx-auto" colspan="2"><img class="image" src="../../../../assets/images/img/{{appointment.nailShape}}/{{appointment.nailColor}}/{{appointment.nailDesign}}.png" style="width:35%;"/> </td>
                               </div>
                               <ng-template #noPSdesign>
                                 <td class="p-1 text-center mx-auto" colspan><img class= "image" [src]="appointment.nailPhoto" style="width:35%;"></td>

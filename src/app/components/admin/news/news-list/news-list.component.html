@@ -7,14 +7,15 @@
     
         <div class="card border-white shadow-sm rounded p-3 my-5 rounded-lg col-sm-12 col-md-7 mt-3 mb-4">
             <div class="pt-3 pb-2 mb-3 border-bottom">
-              <h1 class="h2">Appointment List</h1>
+              <h1 class="h2">News List</h1>
             </div>
-            <section *ngFor="let appointment of appointments; let index = index ">
+            <button class="btn btnPrimary mx-auto mb-3" [routerLink]="['/news-add']">Add</button>
+            <section *ngFor="let news of newss; let index = index ">
               <div class="table-responsive">
                 <div class="row m-0 p-0 justify-content-between topbar">
                   
                     <div class="col-4 text-left my-auto">
-                      <img class="p-1" routerLink="/edit-appointments/{{appointment.$key}}" src="../../../../assets/images/edit1.png" alt="">
+                      <img class="p-1"  src="../../../../assets/images/edit1.png" alt="">
                       <img (click)="delete(appointment.id)" src="../../../../assets/images/basura.png" alt="">
                     </div>
 
@@ -31,10 +32,10 @@
                   
                   <tbody >
                     <tr>
-                      <td scope="row">{{appointment.uName}}</td>
-                      <td>{{appointment.selectStaff}}</td>
-                      <td>{{appointment.selectService}}</td>
-                      <td >{{appointment.selectDate.toDate() | date:'dd/MM/yyyy'}} <br> <b>{{appointment.selectTime}}</b></td>
+                      <td class="p-1 text-center mx-auto"><img [src]=news.newsPhoto style="width:40%;"></td>
+                      <td>{{news.title}}</td>
+                      <td>{{news.price}}</td>
+                      <td >{{news.description}}</td>
                     </tr>
                   </tbody>
                 </table>

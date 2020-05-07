@@ -108,14 +108,9 @@
             <option value ="5:30 PM">5:30 PM</option>
           </select>
           <small class="mt-0 mb-1 text-danger" *ngIf=" isTaken">
-            <div>Username already taken.</div>
+            <div>Date is already taken,please select another hour.</div>
           </small>
-
-
-          <!-- <input (blur)="search($event)" type="date" name="test" id="test">
-          <small class="mt-0 mb-1 text-danger" *ngIf=" isTaken">
-            <div>Username already taken.</div>
-          </small> -->
+          
           <div  *ngIf="disable == true else nailPhoto">
             <small class="form-text text-muted">
               You have chosen to make your own design! 
@@ -218,9 +213,6 @@
             <textarea [appDisablecontrol]="disable" formControlName="specifyDesign" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
           </div>
           <div class="row">
-            <div class="col-6">
-              <button class="btnPrimary btn p-2" (click)="resetForm()">Reset</button>
-            </div>
             <div class="col-6">
               <div *ngIf="disable == false else PolisoftDesign">
                 <button type="submit" class="btnPrimary btn p-2" [disabled]="!meetingForm.valid && clicked" (click)="booking(meetingForm.value);clicked = true">Submit</button>

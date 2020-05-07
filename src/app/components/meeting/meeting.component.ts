@@ -2,17 +2,23 @@ import { Component, OnInit, ViewChild, NgModule, ElementRef } from '@angular/cor
 import { Title } from '@angular/platform-browser';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import {DateButton} from 'angular-bootstrap-datetimepicker';
 import {unitOfTime} from 'moment';
 import * as moment from 'moment';
 import { AngularFireStorage} from '@angular/fire/storage';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
-import {NavbarServiceService} from 'src/app/shared/services/navbar-service.service'
 import {NavbarServiceService} from 'src/app/shared/services/navbar-service.service';
 import { Appoint } from '../../shared/model/appoint';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
+export interface Task {
+  selectService: string;
+  selectDate: string;
+  selectTime: string;
+}
 
 @Component({
   selector: 'app-meeting',
@@ -23,7 +29,7 @@ export class MeetingComponent implements OnInit {
   @ViewChild('tipo',{static: true})tipo: ElementRef;
   @ViewChild('color',{static: true})color: ElementRef;
   @ViewChild('diseno',{static: true})diseno: ElementRef;
-
+//variables
   e: any;
   isTaken = false;
   disablePastDates = true;
@@ -39,6 +45,9 @@ export class MeetingComponent implements OnInit {
   uid;
   isAdmin: boolean;
   isUser: boolean;
+//Display appointments
+  private taskCollection: AngularFirestoreCollection<Task>;
+  tasks: Observable<Task[]>;
  
   constructor(
     private userService: UserService,
@@ -151,9 +160,8 @@ export class MeetingComponent implements OnInit {
           this.app.preAddAndUpdateAppointment(data, this.image);
           console.log(this.image);
           console.log(data);
-
         }
-        this.resetForm();
+        this.router.navigateByUrl('/meeting-done');
     }
     book() { 
       if(!this.selectStaff.errors
@@ -161,7 +169,7 @@ export class MeetingComponent implements OnInit {
           this.nav.addAppointment(this.meetingForm.value)
           console.log(this.meetingForm.value)
           }
-          this.router.navigateByUrl('/meeting');
+          this.router.navigateByUrl('/meeting-done');
       }
      
     resetForm(){

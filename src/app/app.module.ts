@@ -52,8 +52,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {ToastrModule} from 'ngx-toastr';
 import { DisablecontrolDirective } from './components/meeting/disablecontrol.directive';
+import { MeetingDoneComponent } from './components/meeting-done/meeting-done.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 @NgModule({
@@ -83,7 +83,8 @@ firebase.initializeApp(environment.firebaseConfig);
     LoadingComponent,
     NewsListComponent,
     NewsEditComponent,
-    NewsAddComponent
+    NewsAddComponent,
+    MeetingDoneComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +101,6 @@ firebase.initializeApp(environment.firebaseConfig);
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot( ),
     ModalModule
   ],
   providers: [AuthService,UserService, UploadService, AppointmentService,  NewsService],

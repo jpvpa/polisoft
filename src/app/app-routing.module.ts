@@ -21,6 +21,8 @@ import { LoadingComponent } from './loading/loading.component';
 import { NewsListComponent } from './components/admin/news/news-list/news-list.component';
 import { NewsEditComponent } from './components/admin/news/news-edit/news-edit.component';
 import { NewsAddComponent } from './components/admin/news/news-add/news-add.component';
+import { MeetingDoneComponent } from './components/meeting-done/meeting-done.component';
+
 // Import canActivate guard services
 /* import { AuthGuard } from "./shared/guard/auth.guard";
 import { SecureInnerPagesGuard } from "./shared/guard/secure-inner-pages.guard"; */
@@ -47,6 +49,8 @@ const routes: Routes = [
   { path: 'news-list', component: NewsListComponent },
   { path: 'news-edit', component: NewsEditComponent },
   { path: 'news-add', component: NewsAddComponent },
+  { path: 'meeting-done', component: MeetingDoneComponent },
+  
   
 
 ];
