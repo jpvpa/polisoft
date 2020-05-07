@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { News } from 'src/app/shared/model/news';
+import { NewsService } from '../news.service';
 
 @Component({
   selector: 'app-news-list',
@@ -7,14 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewsListComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public news: NewsService) { }
+  newss: News[]
   ngOnInit() {
+    this.news.getNews().subscribe(data => {
+      this.newss = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          ...e.payload.doc.data() as News
+        } 
+      })
+    });
   }
 
-  /* onEditPost(news: News) {
+
+  onEditNews(news: News) {
     console.log('Edit post', news);
     this.openDialog(news);
-  } */
+  }
+  openDialog(news?: News): void {
+    const config = {
+      data: {
+        message: news ? 'Edit Post' : 'New Post',
+        content: news
+      }
+    };
+  }
+
 
 }

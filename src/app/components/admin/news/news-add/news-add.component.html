@@ -2,11 +2,14 @@
     <div class="container pt-md-3">
       <div class="row">
         <div class="h-100 col-sm-12 col-md-3">
-          <app-sidebar-dashboard></app-sidebar-dashboard>
+          <app-sidebar-dashadmin></app-sidebar-dashadmin>
         </div>
           <div id="account-card" class=" card border-white shadow-sm rounded p-3 my-5 bg-white rounded px-4 col-sm-12 col-md-7">
-            <div id="account-header" class="row justify-content-between mt-2 mt-md-3 mr-3">
-              <h3 class="col-auto align-self-center">Add a service</h3>
+            <div id="account-header" class="row h-100 justify-content-between mt-2 mt-md-3 mr-3">
+              <div class="col-1"><img (click)="goBack()" class="p-1"  src="../../../../assets/images/back.png" alt=""></div>
+            <div class="col-11">
+              <h3 class="col-auto align-self-center my-auto align-middle">Add a service</h3>
+            </div>
             </div>
             <hr>
             <form [formGroup]="serviceForm">
@@ -31,17 +34,15 @@
                       class="form-control" 
                       id="InputDescription">
               </div>
-            </form>
-
-
-            <div class="row mb-5">
-              <div class="form-group pt-4 col-12 col-sm-6 mb-1 align-self-center">
-            <div class="custom-file p-2" >
-                <input  formControlName="newsPhoto" type="file" class="custom-file-input inputfile form-control" (change)="chooseImage($event)" accept="image/*">
-                <label class="custom-file-label form-control" for="InputPhoto"><i class="fa fa-upload mr-1" aria-hidden="true"></i>{{filename}}</label>
-              </div>
+              <div class="row mb-5">
+                <div class="form-group pt-4 col-12 col-sm-6 mb-1 align-self-center">
+              <div class="custom-file p-2" >
+                  <input  formControlName="newsPhoto" type="file" class="custom-file-input inputfile form-control" (change)="chooseImage($event)" accept="image/*">
+                  <label class="custom-file-label form-control" for="InputPhoto"><i class="fa fa-upload mr-1" aria-hidden="true"></i>{{filename}}</label>
+                </div>
+            </div>
           </div>
-        </div>
-        <button type="submit" class="btnPrimary btn p-2" [disabled]="clicked" (click)="booking(meetingForm.value);clicked = true">Submit</button>
+            </form>
+        <button type="submit" class="btnPrimary btn p-2" [disabled]="clicked" (click)="add(serviceForm.value);clicked = true">Submit</button>
       </div>
   </div>

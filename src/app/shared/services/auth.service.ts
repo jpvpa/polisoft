@@ -148,13 +148,13 @@ export class AuthService {
           };
           if (this.afAuth.auth.currentUser) {
             this.getAuth().currentUser.sendEmailVerification().then(() => {
-              this.SignOut();
+              this.lOut();
             });
           }
           return userRef.set(data);
         });
   }
-  SignOut(){
+  lOut(){
     this.afAuth.auth.signOut().then(
       () => {
       console.log('User logged out successfully.');
@@ -165,7 +165,7 @@ export class AuthService {
   sendEmailVerify(){
     if (this.afAuth.auth.currentUser) {
       this.getAuth().currentUser.sendEmailVerification().then(() => {
-        this.logout();
+        this.lOut();
       });
     }
   }

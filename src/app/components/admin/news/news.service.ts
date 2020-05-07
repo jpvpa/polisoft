@@ -21,11 +21,12 @@ export class NewsService {
   private downloadURL: Observable<string>;
 
   constructor(private afs: AngularFirestore,
-    private storage: AngularFireStorage) { 
-    this.newsCollection = afs.collection<News>('appointments');
+    private storage: AngularFireStorage,
+    private db: AngularFirestore,) { 
+    this.newsCollection = afs.collection<News>('news');
   }
 
-  public getAllPosts(): Observable<News[]> {
+  public getAllNews(): Observable<News[]> {
     return this.newsCollection
       .snapshotChanges()
       .pipe(
@@ -47,7 +48,7 @@ export class NewsService {
     console.log(image);
   }
 
-  saveAppointment(news: News) {
+  saveNews(news: News) {
     const newsObj = {
       title : news.title,
       price : news.price,
@@ -76,7 +77,7 @@ export class NewsService {
         finalize(() => {
           fileRef.getDownloadURL().subscribe(urlImage => {
             this.downloadURL = urlImage;
-            this.saveAppointment(news);
+            this.saveNews(news);
             console.log(news)
             console.log(this.downloadURL);
           });
@@ -94,6 +95,10 @@ export class NewsService {
     } else {
       return this.newsCollection.doc(news.id).update(news);
     }
+  }
+
+  getNews() {
+    return this.db.collection('news').snapshotChanges();
   }
 
 

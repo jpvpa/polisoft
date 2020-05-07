@@ -53,6 +53,7 @@ import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DisablecontrolDirective } from './components/meeting/disablecontrol.directive';
+import { MeetingDoneComponent } from './components/meeting-done/meeting-done.component';
 
 firebase.initializeApp(environment.firebaseConfig);
 @NgModule({
@@ -82,7 +83,8 @@ firebase.initializeApp(environment.firebaseConfig);
     LoadingComponent,
     NewsListComponent,
     NewsEditComponent,
-    NewsAddComponent
+    NewsAddComponent,
+    MeetingDoneComponent
   ],
   imports: [
     BrowserModule,

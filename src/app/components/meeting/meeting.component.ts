@@ -26,7 +26,6 @@ export interface Task {
   templateUrl: './meeting.component.html',
   styleUrls: ['./meeting.component.css']
 })
-
 export class MeetingComponent implements OnInit {
   @ViewChild('tipo', { static: true }) tipo: ElementRef;
   @ViewChild('color', { static: true }) color: ElementRef;
@@ -169,7 +168,7 @@ export class MeetingComponent implements OnInit {
       console.log(this.image);
       console.log(data);
     }
-    this.resetForm();
+    this.router.navigateByUrl('/meeting-done');
   }
 
   book() {
@@ -178,8 +177,7 @@ export class MeetingComponent implements OnInit {
       this.nav.addAppointment(this.meetingForm.value)
       console.log(this.meetingForm.value)
     }
-    this.router.navigateByUrl('/meeting');
-    this.resetForm(); //Clean after click the button
+    this.router.navigateByUrl('/meeting-done');
   }
 
   resetForm() {

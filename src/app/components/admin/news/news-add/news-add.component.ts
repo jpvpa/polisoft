@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { News } from '../../../../shared/model/news';
 import { NewsService } from '../news.service';
+import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -11,10 +12,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class NewsAddComponent implements OnInit {
   image: any;
   constructor(
-    public news : NewsService
+    public news : NewsService,
+    private location: Location,
   ) { }
 
-  booking(data: News) { 
+  add(data: News) { 
     this.news.preAddAndUpdateNews(data, this.image);
     console.log(this.image);
     console.log(data);
@@ -46,7 +48,13 @@ export class NewsAddComponent implements OnInit {
   get newsPhoto (){
     return this.serviceForm.get('newsPhoto')
   }
-
+  chooseImage(event: any): void {
+    this.image = event.target.files[0];
+    console.log(this.image);
+  }
+  goBack(){
+    this.location.back();
+  }
     
 
   ngOnInit() {
