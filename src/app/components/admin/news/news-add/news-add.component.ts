@@ -3,6 +3,7 @@ import { News } from '../../../../shared/model/news';
 import { NewsService } from '../news.service';
 import { Location } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-add',
@@ -12,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class NewsAddComponent implements OnInit {
   image: any;
   constructor(
+    public router: Router,
     public news : NewsService,
     private location: Location,
   ) { }
@@ -20,6 +22,7 @@ export class NewsAddComponent implements OnInit {
     this.news.preAddAndUpdateNews(data, this.image);
     console.log(this.image);
     console.log(data);
+    this.router.navigateByUrl('/news-list');
   }
   serviceForm = new FormGroup ({
     title : new FormControl ('', [

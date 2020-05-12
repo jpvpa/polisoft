@@ -96,6 +96,9 @@ export class NewsService {
       return this.newsCollection.doc(news.id).update(news);
     }
   }
+  deleteAppointment(newsId: string){
+    this.db.doc('news/' + newsId).delete();
+}
 
   getNews() {
     return this.db.collection('news').snapshotChanges();

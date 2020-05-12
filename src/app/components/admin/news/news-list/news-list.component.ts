@@ -21,7 +21,9 @@ export class NewsListComponent implements OnInit {
       })
     });
   }
-
+  delete(id: string) {
+    this.news.deleteAppointment(id);
+  } 
 
   onEditNews(news: News) {
     console.log('Edit post', news);
