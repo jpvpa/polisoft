@@ -17,7 +17,6 @@
                       <a class="badge badge-pill badge-light mx-auto mb-2" (click)="showSubItem(index)">show {{visibleIndex === index ? 'less':'more' }}</a> 
                     </div>
                     <div class="col-4 text-right my-auto">
-                      <img class="p-1" routerLink="/edit-appointments/{{appointment.$key}}" src="../../../../assets/images/edit1.png" alt="">
                       <img (click)="delete(appointment.id)" src="../../../../assets/images/basura.png" alt="">
                     </div>
 
@@ -54,10 +53,10 @@
                             </tr>
                             <tr class="p-0 m-0">
                               <div *ngIf="appointment.nailColor || appointment.nailDesign || appointment.nailShape else noPSdesign">
-                                <td class="p-1 text-center mx-auto" colspan="2"><img class="image" src="../../../../assets/images/img/{{appointment.nailShape}}/{{appointment.nailColor}}/{{appointment.nailDesign}}.png" style="width:35%;"/> </td>
+                                <td class="p-1 text-center mx-auto" colspan="2"><img class="image" src="../../../../assets/images/img/{{appointment.nailShape}}/{{appointment.nailColor}}/{{appointment.nailDesign}}.png" style="width:50%;"/> </td>
                               </div>
                               <ng-template #noPSdesign>
-                                <td class="p-1 text-center mx-auto" colspan><img class= "image" [src]="appointment.nailPhoto" style="width:35%;"></td>
+                                <td class="p-1 text-center mx-auto" colspan><img class= "image" [src]="appointment.nailPhoto" style="width:50%;"></td>
                               </ng-template>
                             </tr>
                         </ng-container>

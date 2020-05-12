@@ -1,0 +1,15 @@
+.form-control{
+    border-radius: 1rem;
+  }
+  .btnPrimary{
+    width: 100%;
+    border-radius: 1rem;
+    background-color: #ffd8cb;
+    color: white;
+    text-align: center;
+  
+  }
+  .upimg{
+    width: 10rem;
+    height: 10rem;
+  }
