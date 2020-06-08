@@ -1,227 +1,182 @@
-  <section class="container">
-    <form [formGroup]="meetingForm"  class="needs-validation">
-      <div class="row p-2">
-        <div class="col-12">
-          <h1 class="m-3 p-0">Book an Appointment</h1>
-        </div>
-        <section class="col-md-6 col-12 p-4">
-        <div *ngIf="isUser == false else regUsers">
-          
-            <label for="uName">Name</label>
-            <input type="text" 
-                  class="form-control" 
-                  id="uName" 
-                  formControlName="uName"
-                  placeholder="First Name"
-                  required>
-                 <!--  <small class="mt-0 mb-1 text-danger" *ngIf="uName.touched && uName.errors">
-                    <div *ngIf="uName.errors.required">At least your First Name and Last Name</div>
-                  </small> -->
-
-                  <label for="lName">Last Name</label>
-                  <input type="text" 
-                        class="form-control" 
-                        id="lName" 
-                        formControlName="lName"
-                        placeholder="Last Name"
-                        required>
-          </div>
-
-
-           <ng-template  #regUsers >
-
-            <label for="displayname">First Name</label>
-            <input type="text" 
-                  class="form-control" 
-                  id="displayname" 
-                  value="{{displayName}}" 
-                  formControlName="uName"
-                  placeholder="{{displayName}}"
-                  required>
-            <label for="username">Username</label>
-                  <input type="text" 
-                        class="form-control" 
-                        id="username" 
-                        value="{{userName}}" 
-                        formControlName="lName"
-                        placeholder="{{userName}}"
-                        required>
-
-           </ng-template>
-    
-          <label for="Empleado">Staff</label>
-          <select formControlName="selectStaff" class="form-control" required>
-            <option value="0" selected>Choose one...</option>
-            <option value="Sofia Villarreal">Sofia Villarreal</option>
-            <option value="Maria Espinoza">María Espinoza</option>
-            <option value="Paola Rodriguez">Paola Rodriguez</option>
-          </select>
-          <small class="mt-0 mb-1 text-danger" *ngIf="selectStaff.touched && selectStaff.errors">
-            <div *ngIf="selectStaff.errors.required">It is required that you select a member of staff.</div>
-          </small>
-
-    
-          <label for="Servicio">Service</label>
-          <select formControlName="selectService" class="form-control" required>
-            <option value="0" selected>Choose one...</option>
-            <option value= "Maniqure">Maniqure</option>
-            <option value="Pediqure">Pediqure</option>
-            <option value ="PM">Maniquire y pediqure</option>
-          </select>
-          <small class="mt-0 mb-1 text-danger" *ngIf="selectService.touched && selectService.errors">
-            <div *ngIf="selectService.errors.required">It is required that you select a type of service.</div>
-          </small>
-    
-          <label for="fecha">Date Picker</label>
-          <dl-date-time-picker 
-            startView="day" 
-            maxView="day" 
-            minView="day" 
-            minuteStep="30"
-            formControlName="selectDate"
-            id="selectedDate"
-            [selectFilter]="datePickerFilter"
-            [(ngModel)]="selectedDate">
-            <small class="mt-0 mb-1 text-danger" *ngIf="selectDate.touched && isTaken">
-              <div>Date is already taken.</div>
-            </small>
-  
-          </dl-date-time-picker>
-          <label for="Time">Time Picker</label>
-          <select (change)="search($event)" formControlName="selectTime" class="form-control" required>
-            <option value="0" selected>Choose one...</option>
-            <option value= "9:00 AM">9:00 AM</option>
-            <option value="9:30 AM">9:30 AM</option>
-            <option value ="10:00 AM">10:00 AM</option>
-            <option value ="10:30 AM">10:30 AM</option>
-            <option value ="11:00 AM">11:00 AM</option>
-            <option value ="11:30 AM">11:30 AM</option>
-            <option value ="12:00 AM">12:00 AM</option>
-            <option value ="12:30 AM">12:30 AM</option>
-            <option value ="1:00 PM">1:00 PM</option>
-            <option value ="1:30 PM">1:30 PM</option>
-            <option value ="3:00 PM">3:00 PM</option>
-            <option value ="3:30 PM">3:30 PM</option>
-            <option value ="4:00 PM">4:00 PM</option>
-            <option value ="4:30 PM">4:30 PM</option>
-            <option value ="5:00 PM">5:00 PM</option>
-            <option value ="5:30 PM">5:30 PM</option>
-          </select>
-          <small class="mt-0 mb-1 text-danger" *ngIf=" isTaken">
-            <div>Date is already taken,please select another hour.</div>
-          </small>
-          
-          <div  *ngIf="disable == true else nailPhoto">
-            <small class="form-text text-muted">
-              You have chosen to make your own design! 
-            </small>
-          </div>
-          <ng-template #nailPhoto>
-            <small class="form-text text-muted">
-              Please provide us with a photo of your idea!!  
-            </small>
-
-            <div class="custom-file p-2" >
-              <input  formControlName="nailPhoto" type="file" class="custom-file-input inputfile form-control" (change)="chooseImage($event)" accept="image/*">
-              <label class="custom-file-label form-control" for="InputPhoto"><i class="fa fa-upload mr-1" aria-hidden="true"></i>{{filename}}</label>
-            </div>
-          </ng-template>
-          <div>
-            <button type="button" 
-                  id="secondOption"
-                  value="disableDesign"
-                  class="active btn"
-                  (click)="disable=false"
-                  [ngClass]="{'active': disable===false}"></button>
-            <label class="p-1" for="secondOption">I have the idea of my own design</label>
-          </div>
-          <div >
-            <button type="button" 
-                  id="firstOption"
-                  value="disableDesign"
-                  class="active btn"
-                  (click)="disable=true"
-                  [ngClass]="{'active': disable===true}"></button>
-            <label class="p-1" for="firstOption">Use polisoft design</label>
-          </div>
-
-
-          <small class="form-text text-muted">
-            In case of not assisting to the appoinment, please contact us for cancelletion.
-          </small>
-        </section>
-      
-  
-        <section class="col-md-6 col-12 p-4">
-          <h4>Polisoft nail design</h4>
-          <label for="Nail shape">Nail shape</label>
-          <div >
-            <select [appDisablecontrol]="disable" formControlName="nailShape" id="tipo" #tipo class="form-control" (change)="actualizarImagen($event)" required>
-              <option value="Almond" selected>Almond </option>
-              <option value="Square">Square</option>
-              <option value="Oval">Oval</option>
-              <option value="Pointy">Pointy</option>
-              <option value="Rounded">Rounded</option>
-            </select>
-          </div>
-          <small class="mt-0 mb-1 text-danger" *ngIf="nailShape.touched && nailShape.errors">
-            <div *ngIf="nailShape.errors.required">It is required that you select a nail shape for your design.</div>
-          </small>
-    
-          <label for="Nail Color">Nail color</label>
-          <div >
-            <select [appDisablecontrol]="disable" formControlName="nailColor" id="color" #color (change)="actualizarImagen($event)" class="form-control" required>
-              <option value="0" selected disabled>No Color</option>
-              <option value="Blue">Blue </option>
-              <option value="Green">Green</option>
-              <option value="Orange">Orange</option>
-              <option value="Pink">Pink</option>
-              <option value="Purple">Purple</option>
-              <option value="Yellow">Yellow</option>
-              <option value="Black">Black</option>
-            </select>
-          </div>
-          <small class="mt-0 mb-1 text-danger" *ngIf="nailColor.touched && nailColor.errors">
-            <div *ngIf="nailColor.errors.required">It is required that you select a nail color for your design.</div>
-          </small>
-    
-          <label for="Nail Design">Nail Design</label>
-          <div >
-            <select [appDisablecontrol]="disable" formControlName="nailDesign" id="diseno" #diseno class="form-control" (change)="actualizarImagen($event)" runat="server" required>
-              <option value="SD" selected disabled>No design</option>
-              <option value="Deg">Degraded</option>
-              <option value="Ped">Rhinestones</option>
-              <option value="ZZ">Zig-Zag</option>
-              <option value="Ra">Stripes</option>
-              <option value="Pu">Dots</option>
-            </select>
-          </div>
-          <small class="mt-0 mb-1 text-danger" *ngIf="nailDesign.touched && nailDesign.errors">
-            <div *ngIf="nailDesign.errors.required">It is required that you select a nail design</div>
-          </small>
-          <small class="form-text text-muted">
-            If you would like another design, you may choose it in the news section.
-          </small>
-          <article>
-            <label class="p-2"for="Servicio"><h5>Your design</h5></label><br>
-            <div class="mx-auto w-100 align-self-center text-center" id="imagenes">
-              <img id="tipoDe" #tipoDe src='' style="width:40%;" />
-            </div>
-          </article>
-          <div class="form-group">
-            <label for="exampleFormControlTextarea1">Specify your design</label>
-            <textarea [appDisablecontrol]="disable" formControlName="specifyDesign" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
-          <div class="row">
-            <div class="col-6">
-              <div *ngIf="disable == false else PolisoftDesign">
-                <button type="submit" class="btnPrimary btn p-2" [disabled]="!meetingForm.valid && clicked" (click)="booking(meetingForm.value);clicked = true">Submit</button>
-              </div>
-              <ng-template #PolisoftDesign>
-                <button type="submit" class="btnPrimary btn p-2" [disabled]="!meetingForm.valid && clicked" (click)="book();clicked = true">Submit</button>
-              </ng-template>
-            </div>
-          </div>
-        </section>
+<section class="container">
+  <form [formGroup]="meetingForm" class="needs-validation">
+    <div class="row p-2">
+      <div class="col-12">
+        <h1 class="m-3 p-0">Book an Appointment</h1>
       </div>
-    </form>
+      <section class="col-md-6 col-12 p-4">
+        <div *ngIf="isUser == false else regUsers">
+          <label for="uName">Name</label>
+          <input type="text" class="form-control" id="uName" formControlName="uName" placeholder="First Name" required>
+          <label for="lName">Last Name</label>
+          <input type="text" class="form-control" id="lName" formControlName="lName" placeholder="Last Name" required>
+        </div>
+        <ng-template #regUsers>
+          <label for="displayname">First Name</label>
+          <input type="text" class="form-control" id="displayname" value="{{displayName}}" formControlName="uName"
+            placeholder="{{displayName}}" required>
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" value="{{userName}}" formControlName="lName"
+            placeholder="{{userName}}" required>
+        </ng-template>
+        <label for="Empleado">Staff</label>
+        <select formControlName="selectStaff" class="form-control" required>
+          <option value="0" selected>Choose one...</option>
+          <option value="Sofia Villarreal">Sofia Villarreal</option>
+          <option value="Maria Espinoza">María Espinoza</option>
+          <option value="Paola Rodriguez">Paola Rodriguez</option>
+        </select>
+        <small class="mt-0 mb-1 text-danger" *ngIf="selectStaff.touched && selectStaff.errors">
+          <div *ngIf="selectStaff.errors.required">It is required that you select a member of staff.</div>
+        </small>
+        <label for="Servicio">Service</label>
+        <select formControlName="selectService" class="form-control" required>
+          <option value="0" selected>Choose one...</option>
+          <option value="Maniqure">Maniqure</option>
+          <option value="Pediqure">Pediqure</option>
+          <option value="PM">Maniquire y pediqure</option>
+        </select>
+        <small class="mt-0 mb-1 text-danger" *ngIf="selectService.touched && selectService.errors">
+          <div *ngIf="selectService.errors.required">It is required that you select a type of service.</div>
+        </small>
+        <label for="fecha">Date Picker</label>
+        <dl-date-time-picker startView="day" maxView="day" minView="day" minuteStep="30" formControlName="selectDate"
+          id="selectedDate" [selectFilter]="datePickerFilter" [(ngModel)]="selectedDate">
+          <small class="mt-0 mb-1 text-danger" *ngIf="selectDate.touched && isTaken">
+            <div>Date is already taken.</div>
+          </small>
+        </dl-date-time-picker>
+        <label for="Time">Time Picker</label>
+        <select (change)="search($event)" formControlName="selectTime" class="form-control" required>
+          <option value="0" selected>Choose one...</option>
+          <option value="9:00 AM">9:00 AM</option>
+          <option value="9:30 AM">9:30 AM</option>
+          <option value="10:00 AM">10:00 AM</option>
+          <option value="10:30 AM">10:30 AM</option>
+          <option value="11:00 AM">11:00 AM</option>
+          <option value="11:30 AM">11:30 AM</option>
+          <option value="12:00 AM">12:00 AM</option>
+          <option value="12:30 AM">12:30 AM</option>
+          <option value="1:00 PM">1:00 PM</option>
+          <option value="1:30 PM">1:30 PM</option>
+          <option value="3:00 PM">3:00 PM</option>
+          <option value="3:30 PM">3:30 PM</option>
+          <option value="4:00 PM">4:00 PM</option>
+          <option value="4:30 PM">4:30 PM</option>
+          <option value="5:00 PM">5:00 PM</option>
+          <option value="5:30 PM">5:30 PM</option>
+        </select>
+        <small class="mt-0 mb-1 text-danger" *ngIf=" isTaken">
+          <div>Date is already taken,please select another hour.</div>
+        </small>
+        <small class="form-text text-muted">
+          In case of not assisting to the appoinment, please contact us for cancelletion.
+        </small>
+      </section>
+      <section class="col-md-6 col-12 p-4">
+        <h4>Polisoft nail design</h4>
+        <!--Choose a image-->
+        <div *ngIf="disable == true else nailPhoto">
+          <small class="form-text text-muted">
+            You have chosen to make your own design!
+          </small>
+        </div>
+        <ng-template #nailPhoto>
+          <small class="form-text text-muted">
+            Please provide us with a photo of your idea!!
+          </small>
+          <div class="custom-file p-2">
+            <input formControlName="nailPhoto" type="file" class="custom-file-input inputfile form-control"
+              (change)="chooseImage($event)" accept="image/*">
+            <label class="custom-file-label form-control" for="InputPhoto"><i class="fa fa-upload mr-1"
+                aria-hidden="true"></i>{{filename}}</label>
+          </div>
+        </ng-template>
+        <div>
+          <button type="button" id="secondOption" value="disableDesign" class="active btn" (click)="disable=false"
+            [ngClass]="{'active': disable===false}"></button>
+          <label class="p-1" for="secondOption">I have the idea of my own design</label>
+        </div>
+        <div>
+          <button type="button" id="firstOption" value="disableDesign" class="active btn" (click)="disable=true"
+            [ngClass]="{'active': disable===true}"></button>
+          <label class="p-1" for="firstOption">Use polisoft design</label>
+        </div>
+        <!--Time design-->
+        <label for="Nail shape">Nail shape</label>
+        <div>
+          <select [appDisablecontrol]="disable" formControlName="nailShape" id="tipo" #tipo class="form-control"
+            (change)="actualizarImagen($event)" required>
+            <option value="Almond" selected>Almond </option>
+            <option value="Square">Square</option>
+            <option value="Oval">Oval</option>
+            <option value="Pointy">Pointy</option>
+            <option value="Rounded">Rounded</option>
+          </select>
+        </div>
+        <small class="mt-0 mb-1 text-danger" *ngIf="nailShape.touched && nailShape.errors">
+          <div *ngIf="nailShape.errors.required">It is required that you select a nail shape for your design.</div>
+        </small>
+        <label for="Nail Color">Nail color</label>
+        <div>
+          <select [appDisablecontrol]="disable" formControlName="nailColor" id="color" #color
+            (change)="actualizarImagen($event)" class="form-control" required>
+            <option value="0" selected disabled>No Color</option>
+            <option value="Blue">Blue </option>
+            <option value="Green">Green</option>
+            <option value="Orange">Orange</option>
+            <option value="Pink">Pink</option>
+            <option value="Purple">Purple</option>
+            <option value="Yellow">Yellow</option>
+            <option value="Black">Black</option>
+          </select>
+        </div>
+        <small class="mt-0 mb-1 text-danger" *ngIf="nailColor.touched && nailColor.errors">
+          <div *ngIf="nailColor.errors.required">It is required that you select a nail color for your design.</div>
+        </small>
+        <label for="Nail Design">Nail Design</label>
+        <div>
+          <select [appDisablecontrol]="disable" formControlName="nailDesign" id="diseno" #diseno class="form-control"
+            (change)="actualizarImagen($event)" runat="server" required>
+            <option value="SD" selected disabled>No design</option>
+            <option value="Deg">Degraded</option>
+            <option value="Ped">Rhinestones</option>
+            <option value="ZZ">Zig-Zag</option>
+            <option value="Ra">Stripes</option>
+            <option value="Pu">Dots</option>
+          </select>
+        </div>
+        <small class="mt-0 mb-1 text-danger" *ngIf="nailDesign.touched && nailDesign.errors">
+          <div *ngIf="nailDesign.errors.required">It is required that you select a nail design</div>
+        </small>
+        <small class="form-text text-muted">
+          If you would like another design, you may choose it in the news section.
+        </small>
+        <article>
+          <label class="p-2" for="Servicio">
+            <h5>Your design</h5>
+          </label><br>
+          <div class="mx-auto w-100 align-self-center text-center" id="imagenes">
+            <img id="tipoDe" #tipoDe src='' style="width:40%;" />
+          </div>
+        </article>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Specify your design</label>
+          <textarea [appDisablecontrol]="disable" formControlName="specifyDesign" class="form-control"
+            id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div *ngIf="disable == false else PolisoftDesign">
+              <button type="submit" class="btnPrimary btn p-2" [disabled]="!meetingForm.valid && clicked"
+                (click)="booking(meetingForm.value);clicked = true">Submit</button>
+            </div>
+            <ng-template #PolisoftDesign>
+              <button type="submit" class="btnPrimary btn p-2" [disabled]="!meetingForm.valid && clicked"
+                (click)="book();clicked = true">Submit</button>
+            </ng-template>
+          </div>
+        </div>
+      </section>
+    </div>
+  </form>

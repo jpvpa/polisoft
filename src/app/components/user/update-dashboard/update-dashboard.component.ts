@@ -108,6 +108,7 @@ export class UpdateDashboardComponent implements OnInit {
     if (!this.isTaken && !this.username.errors && !this.displayname.errors && !this.inputstatus.errors) {
       this.auth.updateUser(this.displayName, this.userName, this.status).then(
         () => console.log('User details updated'));
+        window.confirm("Verify all fields, before accept");
     }
   }
 
